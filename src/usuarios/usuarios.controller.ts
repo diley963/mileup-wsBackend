@@ -1,8 +1,17 @@
 import {
-  Controller, Get, Post, Body, Param, Put, Delete, HttpException, HttpStatus, ParseUUIDPipe
-} from '@nestjs/common';import { UsuariosService } from './usuarios.service';
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  Delete,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
+import { UsuariosService } from './usuarios.service';
 import { Usuario } from './usuario.entity';
-import { CreateUsuarioDto, UpdateUsuarioDto } from './usuario.dto';
+import { CreateUsuarioDto } from './usuario.dto';
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -18,11 +27,14 @@ export class UsuariosController {
         data: usuario,
       };
     } catch (error) {
-      throw new HttpException({
-        statusCode: HttpStatus.BAD_REQUEST,
-        message: 'Error al crear el usuario',
-        error: error.message,
-      }, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.BAD_REQUEST,
+          message: 'Error al crear el usuario',
+          error: error.message,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 
