@@ -1,10 +1,12 @@
-import { IsString, IsBoolean, IsNotEmpty, MinLength, IsUUID } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 // DTO para crear un usuario
 export class CreateUsuarioDto {
   @IsString()
   @IsNotEmpty({ message: 'El nombre de usuario es obligatorio' })
-  @MinLength(3, { message: 'El nombre de usuario debe tener al menos 3 caracteres' })
+  @MinLength(3, {
+    message: 'El nombre de usuario debe tener al menos 3 caracteres',
+  })
   nombre_usuario: string;
 
   @IsString()
@@ -17,10 +19,11 @@ export class CreateUsuarioDto {
 }
 
 // DTO para actualizar un usuario
-export class UpdateUsuarioDto { 
-
+export class UpdateUsuarioDto {
   @IsString()
-  @MinLength(3, { message: 'El nombre de usuario debe tener al menos 3 caracteres' })
+  @MinLength(3, {
+    message: 'El nombre de usuario debe tener al menos 3 caracteres',
+  })
   nombre_usuario?: string;
 
   @IsString()
