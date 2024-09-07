@@ -1,10 +1,23 @@
 import {
-  Controller, Get, Post, Body, Param, Put, Delete, HttpException, HttpStatus, ParseUUIDPipe
-} from '@nestjs/common';import { UsuariosService } from './usuarios.service';
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Put,
+  Delete,
+  HttpException,
+  HttpStatus,
+  UseGuards, 
+  ParseUUIDPipe,
+} from '@nestjs/common';
+import { UsuariosService } from './usuarios.service';
 import { Usuario } from './usuario.entity';
 import { CreateUsuarioDto, UpdateUsuarioDto } from './usuario.dto';
+import { AuthGuard } from '@nestjs/passport'; 
 
 @Controller('usuarios')
+@UseGuards(AuthGuard('jwt')) 
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
@@ -18,11 +31,14 @@ export class UsuariosController {
         data: usuario,
       };
     } catch (error) {
-      throw new HttpException({
-        statusCode: HttpStatus.BAD_REQUEST,
-        message: 'Error al crear el usuario',
-        error: error.message,
-      }, HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.BAD_REQUEST,
+          message: 'Error al crear el usuario',
+          error: error.message,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 
@@ -37,7 +53,10 @@ export class UsuariosController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateUsuarioDto: Partial<Usuario>) {
+  update(
+    @Param('id') id: string,
+    @Body() updateUsuarioDto: Partial<Usuario>,
+  ) {
     return this.usuariosService.update(id, updateUsuarioDto);
   }
 

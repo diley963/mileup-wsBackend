@@ -3,10 +3,15 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsuariosModule } from './usuarios/usuarios.module';
-import { Usuario } from './usuarios/usuario.entity'; // Asegúrate de que la ruta sea correcta
+import { Usuario } from './usuarios/usuario.entity'; 
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config'; 
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true, // Asegúrate de que ConfigModule sea global
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -19,6 +24,7 @@ import { Usuario } from './usuarios/usuario.entity'; // Asegúrate de que la rut
       logging: true, // Opcional para depuración
     }),
     UsuariosModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
