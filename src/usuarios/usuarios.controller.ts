@@ -39,6 +39,14 @@ export class UsuariosController {
         },
         HttpStatus.BAD_REQUEST,
       );
+      throw new HttpException(
+        {
+          statusCode: HttpStatus.BAD_REQUEST,
+          message: 'Error al crear el usuario',
+          error: error.message,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 

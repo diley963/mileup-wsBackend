@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  nest-app:
+    build:
+      context: .
+      args:
+        NODE_ENV: ${NODE_ENV} # Pasa NODE_ENV al Dockerfile
+    container_name: nest-app
+    ports:
+      - '3000:3000'
+    env_file:
+      - .env
+    depends_on:
+      - postgres-db
+
+  postgres-db:
+    image: postgres:16.4
+    container_name: postgres-db
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
