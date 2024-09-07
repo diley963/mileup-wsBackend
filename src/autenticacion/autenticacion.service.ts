@@ -1,20 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { UsuariosService } from '../usuarios/usuarios.service';
 import { JwtService } from '@nestjs/jwt';
-import { Usuario } from '../usuarios/usuario.entity';
+import { Usuario } from '../usuario/usuario.entity';
+import { UsuarioService } from '../usuario/usuario.service';
 
 @Injectable()
-export class AuthService {
+export class AutenticacionService {
   constructor(
-    private usuariosService: UsuariosService,
+    private usuarioService: UsuarioService,
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(
+  async validarUsuario(
     nombre_usuario: string,
     contrasena: string,
   ): Promise<Usuario | null> {
-    const user = await this.usuariosService.findByUsername(nombre_usuario);
+    const user = await this.usuarioService.obtenerUnoPorNombre(nombre_usuario);
     if (user && user.contrasena === contrasena) {
       return user;
     }
