@@ -1,11 +1,12 @@
+import { ConfigModule, ConfigService } from '@nestjs/config'; // Importa ConfigService
+
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AutenticacionModule } from './autenticacion/autenticacion.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsuariosModule } from './usuarios/usuarios.module';
-import { Usuario } from './usuarios/usuario.entity';
-import { AuthModule } from './auth/auth.module';
-import { ConfigModule, ConfigService } from '@nestjs/config'; // Importa ConfigService
+import { Usuario } from './usuario/usuario.entity';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @Module({
   imports: [
@@ -24,12 +25,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config'; // Importa ConfigS
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
         entities: [Usuario],
-        synchronize: true, 
+        synchronize: true,
         logging: true,
       }),
     }),
-    UsuariosModule,
-    AuthModule,
+    UsuarioModule,
+    AutenticacionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

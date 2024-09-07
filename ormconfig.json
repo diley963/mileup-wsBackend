@@ -8,7 +8,7 @@
     "entities": ["dist/**/*.entity{.ts,.js}"],
     "synchronize": false,
     "ssl": {
-      "rejectUnauthorized": false
+      "rejectUnautenticacionorized": false
     },
     "logging": ["query", "error", "schema"]
   }
