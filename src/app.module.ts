@@ -7,6 +7,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Usuario } from './usuario/usuario.entity';
 import { UsuarioModule } from './usuario/usuario.module';
+import { Rol } from './usuario/rol/rol.entity';
+import { RolUsuario } from './usuario/usuarioRol/rolUsuario.entity';
 
 @Module({
   imports: [
@@ -24,11 +26,15 @@ import { UsuarioModule } from './usuario/usuario.module';
         username: configService.get<string>('DATABASE_USER'),
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
-        entities: [Usuario],
+        entities: [Usuario, RolUsuario, Rol],
         synchronize: true,
         logging: true,
       }),
+
+
     }),
+    TypeOrmModule.forFeature([Usuario, RolUsuario, Rol]),
+
     UsuarioModule,
     AutenticacionModule,
   ],

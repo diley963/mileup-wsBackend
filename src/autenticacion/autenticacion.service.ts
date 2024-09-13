@@ -14,7 +14,7 @@ export class AutenticacionService {
     nombre_usuario: string,
     contrasena: string,
   ): Promise<Usuario | null> {
-    const user = await this.usuarioService.obtenerUnoPorNombre(nombre_usuario);
+    const user = await this.usuarioService.obtenerPorNombre(nombre_usuario);
     if (user && user.contrasena === contrasena) {
       return user;
     }

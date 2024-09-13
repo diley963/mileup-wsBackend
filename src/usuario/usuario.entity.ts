@@ -1,16 +1,20 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
+import { RolUsuario } from './usuarioRol/rolUsuario.entity';
 
 @Entity('usuario')
 export class Usuario {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'text', unique: true })
-  nombre_usuario: string;
+  @Column({ name: 'nombre_usuario', nullable: true })
+  nombreUsuario: string;
 
-  @Column({ type: 'text' })
+  @Column({ nullable: true })
   contrasena: string;
 
-  @Column({ type: 'boolean', default: false })
-  esta_bloqueado: boolean;
+  @Column({ name: 'esta_bloqueado', default: false })
+  estaBloqueado: boolean;  
+
+  @OneToMany(() => RolUsuario, rolUsuario => rolUsuario.usuario)
+  rolUsuarios: RolUsuario[];
 }
