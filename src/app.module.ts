@@ -9,6 +9,9 @@ import { Usuario } from './usuario/usuario.entity';
 import { UsuarioModule } from './usuario/usuario.module';
 import { Rol } from './usuario/rol/rol.entity';
 import { RolUsuario } from './usuario/usuarioRol/rolUsuario.entity';
+import { RolModule } from './usuario/rol/rol.module';
+import {Comercio} from './comersio/comersion.entity';
+
 
 @Module({
   imports: [
@@ -26,17 +29,18 @@ import { RolUsuario } from './usuario/usuarioRol/rolUsuario.entity';
         username: configService.get<string>('DATABASE_USER'),
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
-        entities: [Usuario, RolUsuario, Rol],
-        synchronize: true,
+        entities: [Usuario, RolUsuario, Rol, Comercio],
+        synchronize: false,
         logging: true,
       }),
 
 
     }),
-    TypeOrmModule.forFeature([Usuario, RolUsuario, Rol]),
+    TypeOrmModule.forFeature([Usuario, RolUsuario, Rol,Comercio]),
 
     UsuarioModule,
-    AutenticacionModule,
+    RolModule,
+    AutenticacionModule,    
   ],
   controllers: [AppController],
   providers: [AppService],

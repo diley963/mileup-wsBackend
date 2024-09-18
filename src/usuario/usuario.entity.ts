@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { RolUsuario } from './usuarioRol/rolUsuario.entity';
+import { Comercio } from '../comersio/comersion.entity';
 
 @Entity('usuario')
 export class Usuario {
@@ -17,4 +18,7 @@ export class Usuario {
 
   @OneToMany(() => RolUsuario, rolUsuario => rolUsuario.usuario)
   rolUsuarios: RolUsuario[];
+
+  @OneToMany(() => Comercio, comercio => comercio.usuario)
+  comercios: Comercio[];
 }

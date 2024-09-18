@@ -10,11 +10,14 @@ import {
   HttpStatus,
   UseGuards,
 } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiResponse,ApiBearerAuth } from '@nestjs/swagger';
 import { UsuarioService } from './usuario.service';
 import { CrearUsuarioDto } from './dto/crear-usuario.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { ActualizarUsuarioDto } from './dto/actualizar-usuario.dto';
 
+@ApiTags('usuarios')
+@ApiBearerAuth() // Indica que esta ruta requiere JWT
 @Controller('usuario')
 @UseGuards(AuthGuard('jwt'))
 export class UsuarioController {
