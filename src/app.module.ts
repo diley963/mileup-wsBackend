@@ -10,7 +10,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { Rol } from './usuario/rol/rol.entity';
 import { RolUsuario } from './usuario/usuarioRol/rolUsuario.entity';
 import { RolModule } from './usuario/rol/rol.module';
-import {Comercio} from './comersio/comersion.entity';
+import {Comercio} from './comercio/comercio.entity';
 
 
 @Module({
@@ -30,7 +30,7 @@ import {Comercio} from './comersio/comersion.entity';
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
         entities: [Usuario, RolUsuario, Rol, Comercio],
-        synchronize: false,
+        synchronize: true,
         logging: true,
       }),
 

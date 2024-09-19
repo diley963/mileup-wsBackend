@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { RolUsuario } from './usuarioRol/rolUsuario.entity';
-import { Comercio } from '../comersio/comersion.entity';
+import { Comercio } from '../comercio/comercio.entity';
 
 @Entity('usuario')
 export class Usuario {
