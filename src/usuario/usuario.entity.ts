@@ -7,10 +7,10 @@ export class Usuario {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'nombre_usuario', nullable: true })
+  @Column({ name: 'nombre_usuario', nullable: false})
   nombreUsuario: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   contrasena: string;
 
   @Column({ name: 'esta_bloqueado', default: false })

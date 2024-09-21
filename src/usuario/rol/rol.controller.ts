@@ -14,7 +14,9 @@ import {
   import { CrearRolDto } from '../dto/crear-rol.dto'; 
   import { ActualizarRolDto } from '../dto/actualizar-rol.dto';
   import { AuthGuard } from '@nestjs/passport'; 
+import { ApiTags } from '@nestjs/swagger';
   
+  @ApiTags('roles')
   @Controller('roles')
   export class RolController {
     constructor(private readonly rolService: RolService) {}

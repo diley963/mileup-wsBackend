@@ -19,7 +19,7 @@ import { ActualizarUsuarioDto } from './dto/actualizar-usuario.dto';
 @ApiTags('usuarios')
 @ApiBearerAuth() // Indica que esta ruta requiere JWT
 @Controller('usuario')
-@UseGuards(AuthGuard('jwt'))
+//@UseGuards(AuthGuard('jwt'))
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
 

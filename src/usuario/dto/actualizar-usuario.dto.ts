@@ -6,7 +6,7 @@ export class ActualizarUsuarioDto {
   @MinLength(3, {
     message: 'El nombre de usuario debe tener al menos 3 caracteres',
   })
-  nombre_usuario?: string;
+  nombreUsuario: string;
 
   @IsString()
   @MinLength(6, { message: 'La contraseña debe tener al menos 6 caracteres' })

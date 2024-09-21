@@ -7,7 +7,9 @@ import {
 } from '@nestjs/common';
 import { AutenticacionService } from './autenticacion.service';
 import { LoginDto } from './dto/login.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('autenticacion')
 @Controller('autenticacion')
 export class AutenticacionController {
   constructor(private autenticacionService: AutenticacionService) {}
