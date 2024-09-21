@@ -35,4 +35,31 @@ export class CrearComercioDto {
   @IsBoolean()
   @ApiProperty({ description: 'Estado activo del comercio', example: true })
   estaActivo?: boolean;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({ description: 'URL de la imagen del comercio', example: 'http://example.com/imagen.jpg' })
+  UrlImagen?: string;
+
+  @IsOptional()
+  @IsString()
+  @ApiProperty({ description: 'URL del logo del comercio', example: 'http://example.com/logo.jpg' })
+  UrlLogo?: string;
+  
+  @IsOptional()
+  @IsString()
+  @ApiProperty({ description: 'URL del banner del comercio', example: 'http://example.com/banner.jpg' })
+  UrlBaner?: string;
+
+  @IsOptional()
+  @ApiProperty({ description: 'Id del usuario que registra el comercio', example: 'e1b4c4f4-28a3-4e6a-84b5-b8fdb7c9c5e1' })
+  usuarioId?: string;
+
+  @IsOptional()
+  @ApiProperty({ description: 'ID de la ciudad del comercio', example: 'd1a5d9e0-583e-41ae-a4e1-f45ab1e1bc79' })
+  ciudadId?: string;
+
+  @IsOptional()
+  @ApiProperty({ description: 'ID del tipo de comercio', example: 'a1e0b5b1-7241-4dc6-9b9b-66e154d062d7' })
+  tipoComercioId?: string;
 }
