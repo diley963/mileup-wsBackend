@@ -9,22 +9,25 @@ services:
     ports:
       - '3000:3000'
     env_file:
-      - .env.dockerconfiguracion
-    depends_on:
-      - postgres-db
+      - .env
+    # Elimina la dependencia de postgres-db
+    # depends_on:
+    #   - postgres-db
 
-  postgres-db:
-    image: postgres:16.4
-    container_name: postgres-db
-    restart: always
-    ports:
-      - '5432:5432'
-    environment:
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_DB: ${DATABASE_NAME}
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
+  # Elimina el servicio de postgres-db
+  # postgres-db:
+  #   image: postgres:16.4
+  #   container_name: postgres-db
+  #   restart: always
+  #   ports:
+  #     - '5432:5432'
+  #   environment:
+  #     POSTGRES_USER: ${DATABASE_USER}
+  #     POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+  #     POSTGRES_DB: ${DATABASE_NAME}
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
 
-volumes:
-  postgres-data:
+# Elimina el volumen para postgres
+# volumes:
+#   postgres-data:

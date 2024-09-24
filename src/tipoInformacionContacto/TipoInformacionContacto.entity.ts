@@ -10,7 +10,7 @@ export class TipoInformacionContacto {
   descripcion: string; // Ej: "Teléfono Fijo", "WhatsApp", "Correo Electrónico", etc.
 
   @Column({ nullable: true })
-  pat: string; // Para el caso de WhatsApp u otras aplicaciones.
+  path: string; // Para el caso de WhatsApp u otras aplicaciones.
 
   @OneToMany(() => InformacionContacto, informacionContacto => informacionContacto.tipoInformacion)
   informacionContactos: InformacionContacto[];

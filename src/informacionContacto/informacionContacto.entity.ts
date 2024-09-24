@@ -9,6 +9,13 @@ export class InformacionContacto {
 
   @Column({ nullable: true })
   valor?: string;
+ 
+  // Claves foráneas
+  @Column({ type: 'uuid', nullable: true })
+  comercio_id: string;
+
+  @Column({ type: 'uuid', nullable: true })
+  tipo_comercio_id: string;
 
   @ManyToOne(() => Comercio, comercio => comercio.informacionContactos, { onDelete: 'CASCADE' })
   comercio: Comercio;

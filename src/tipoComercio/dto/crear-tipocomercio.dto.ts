@@ -9,11 +9,11 @@ export class CrearTipoComercioDto {
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty({ description: 'nombre corto', example: 'TiendaRopa' })
+  @ApiProperty({ description: 'nombre corto', example: 'tiendaropa' })
   nombre: string;
 
   @IsNotEmpty()
   @IsString()
-  @ApiProperty({ description: 'ruta url', example: '/TiendaRopa' })
+  @ApiProperty({ description: 'ruta url', example: '/tiendaropa' })
   path: string;
 }

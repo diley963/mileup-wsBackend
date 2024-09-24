@@ -1,5 +1,4 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Departamento } from './departamento.entity';
 
 @Entity('pais')
 export class Pais {
@@ -7,8 +6,11 @@ export class Pais {
   id: string;
 
   @Column({ unique: true })
-  nombre: string;
+  indicativo: string; 
 
-  @OneToMany(() => Departamento, (departamento) => departamento.pais)
-  departamentos: Departamento[];
+  @Column({ unique: true, name : 'nombre_corto' })
+  nombreCorto: string; 
+
+  @Column({ unique: true })
+  nombre: string; 
 }

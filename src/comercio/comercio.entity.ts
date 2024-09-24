@@ -1,4 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+  CreateDateColumn,
+  OneToMany
+} from 'typeorm';
 import { Usuario } from '../usuario/usuario.entity';
 import { TipoComercio } from '../tipoComercio/tipo-comercio.entity';
 import { InformacionContacto } from '../informacionContacto/informacionContacto.entity';
@@ -7,10 +15,11 @@ import { Ciudad } from '../lugaresGeograficos/ciudad.entity'; // Importa la enti
 
 @Entity('comercio')
 export class Comercio {
+  
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'nombre_establecimiento', nullable: false })
+  @Column({ nullable: false, name: 'nombre_establecimiento' })
   nombreEstablecimiento: string;
 
   @Column({ nullable: false })
@@ -22,14 +31,14 @@ export class Comercio {
   @Column({ nullable: false })
   nit: string;
 
-  @Column({ nullable: true })
-  UrlImagen: string;
+  @Column({ nullable: true, name: 'urlImagen' })
+  urlImagen: string;
 
-  @Column({ nullable: true })
-  UrlLogo: string;
+  @Column({ nullable: true, name: 'urlLogo' })
+  urlLogo: string;
 
-  @Column({ nullable: true })
-  UrlBaner: string;
+  @Column({ nullable: true, name: 'urlBaner' })
+  urlBaner: string;
 
   @Column('float', { array: true, nullable: true })
   ubicacion: number[]; // Almacenará [latitud, longitud]
@@ -38,19 +47,29 @@ export class Comercio {
   fechaCreacion: Date;
 
   @Column({ name: 'esta_activo', default: true })
-  estaActivo: boolean;
+  estado: boolean;
 
+  // Claves foráneas
+  @Column({ type: 'uuid', nullable: true })
+  usuario_id: string;
+
+  @Column({ type: 'uuid', nullable: true })
+  ciudad_id: string;
+
+  @Column({ type: 'uuid', nullable: true })
+  tipo_comercio_id: string;
+
+  // Relaciones
   @ManyToOne(() => Usuario, (usuario) => usuario.comercios)
-  @JoinColumn({ name: 'usuario_id' }) 
+  @JoinColumn({ name: 'usuario_id' })
   usuario: Usuario;
 
-
-  @ManyToOne(() => Ciudad, ciudad => ciudad.comercios) // Relación con Ciudad
-  @JoinColumn({ name: 'ciudad_id' }) 
-  ciudad: Ciudad; // Campo para la ciudad
+  @ManyToOne(() => Ciudad, (ciudad) => ciudad.comercios)
+  @JoinColumn({ name: 'ciudad_id' })
+  ciudad: Ciudad;
 
   @ManyToOne(() => TipoComercio, (tipoComercio) => tipoComercio.comercios)
-  @JoinColumn({ name: 'tipo_comercio_id' }) 
+  @JoinColumn({ name: 'tipo_comercio_id' })
   tipoComercio: TipoComercio;
 
   @OneToMany(() => InformacionContacto, (informacionContacto) => informacionContacto.comercio)

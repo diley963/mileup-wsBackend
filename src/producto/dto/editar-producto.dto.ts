@@ -25,5 +25,5 @@ export class EditarProductoDto {
   @ApiPropertyOptional({ description: 'URL de la foto del producto', example: 'https://ejemplo.com/foto-actualizada.jpg' })
   @IsOptional()
   @IsString()
-  fotoUrl?: string;
+  imagenUrl?: string;
 }

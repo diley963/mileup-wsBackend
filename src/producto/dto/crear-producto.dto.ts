@@ -6,7 +6,7 @@ export class CrearProductoDto {
   @IsString()
   nombre: string;
 
-  @ApiProperty({ description: 'Precio del producto', example: 19.000 })
+  @ApiProperty({ description: 'Precio del producto', example: 19000 })
   @IsNumber()
   precio: number;
 

@@ -1,15 +1,14 @@
 {
-    "type": "postgres",
-    "host": "dbappmileup.postgres.database.azure.com",
-    "port": 5432,
-    "username": "AdminMile",
-    "password": "Seguridad2024*.",
-    "database": "postgres",
-    "entities": ["dist/**/*.entity{.ts,.js}"],
-    "synchronize": false,
-    "ssl": {
-      "rejectUnautenticacionorized": false
-    },
-    "logging": ["query", "error", "schema"]
-  }
-  
+  "type": "postgres",
+  "host": "dbappmileup.postgres.database.azure.com",
+  "port": 5432,
+  "username": "AdminMile",
+  "password": "Seguridad2024*.",
+  "database": "postgres",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "synchronize": false,
+  "ssl": {
+    "rejectUnauthorized": false
+  },
+  "logging": ["query", "error", "schema"]
+}

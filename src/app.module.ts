@@ -16,6 +16,7 @@ import { Producto } from './producto/producto.entity';
 import { Pais } from './lugaresGeograficos/pais.entity';
 import { Departamento } from './lugaresGeograficos/departamento.entity';
 import { Ciudad } from './lugaresGeograficos/ciudad.entity';
+import { Categoria } from './producto/categoria.entity';
 
 // Importar los módulos
 import { UsuarioModule } from './usuario/usuario.module';
@@ -54,10 +55,14 @@ import { CiudadModule } from './lugaresGeograficos/ciudad.module';
           Producto,
           Pais,
           Departamento,
-          Ciudad
+          Ciudad,
+          Categoria
         ],
         synchronize: true,
         logging: true,
+         // Manejo de SSL con variables de entorno
+        ssl: configService.get<string>('DATABASE_SSL') === 'true' ? { rejectUnauthorized: false } : false,
+    
       }),
     }),
 

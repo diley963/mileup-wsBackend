@@ -8,10 +8,11 @@ export class Departamento {
   id: string;
 
   @Column({ unique: true })
-  nombre: string;
+  nombre: string;  
 
-  @ManyToOne(() => Pais, (pais) => pais.departamentos)
-  pais: Pais;
+  // Claves foráneas
+  @Column({ type: 'uuid', nullable: true })
+  pais_id: string;
 
   @OneToMany(() => Ciudad, (ciudad) => ciudad.departamento)
   ciudades: Ciudad[];
