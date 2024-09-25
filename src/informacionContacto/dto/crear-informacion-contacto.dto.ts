@@ -15,6 +15,7 @@ export class CreateInformacionContactoDto {
   })
   @IsUUID()
   comercioId: string;
+  
 
   @ApiProperty({
     description: 'ID del tipo de información de contacto',
@@ -22,4 +23,6 @@ export class CreateInformacionContactoDto {
   })
   @IsUUID()
   tipoInformacionId: string;
+
+
 }

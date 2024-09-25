@@ -22,9 +22,13 @@ export class CrearProductoDto {
   @ApiPropertyOptional({ description: 'URL de la foto del producto', example: 'https://ejemplo.com/foto.jpg' })
   @IsOptional()
   @IsString()
-  fotoUrl?: string;
+  imagenUrl?: string;
 
   @ApiProperty({ description: 'ID del comercio asociado', example: 'f47ac10b-58cc-4372-a567-0e02b2c3d479' })
   @IsUUID()
   comercioId: string;
+
+  @ApiProperty({ description: 'ID categoria del producto', example: 'f47ac10b-58cc-4372-a567-0e02b2c3d479' })
+  @IsUUID()
+  categoriaId: string;
 }

@@ -50,14 +50,14 @@ export class Comercio {
   estado: boolean;
 
   // Claves foráneas
-  @Column({ type: 'uuid', nullable: true })
-  usuario_id: string;
+  @Column({ type: 'uuid',  name: 'usuario_id', nullable: true })
+  usuarioId: string;
 
-  @Column({ type: 'uuid', nullable: true })
-  ciudad_id: string;
+  @Column({ type: 'uuid', name:'ciudad_id', nullable: true })
+  ciudadId: string;
 
-  @Column({ type: 'uuid', nullable: true })
-  tipo_comercio_id: string;
+  @Column({ type: 'uuid', name: 'tipo_comercio_id',nullable: true })
+  tipoComercioId: string;
 
   // Relaciones
   @ManyToOne(() => Usuario, (usuario) => usuario.comercios)

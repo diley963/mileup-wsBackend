@@ -28,6 +28,9 @@ import { TipoInformacionContactoModule } from './tipoInformacionContacto/tipo-in
 import { InformacionContactoModule } from './informacionContacto/informacion-contacto.module';
 import { ProductoModule } from './producto/producto.module';
 import { CiudadModule } from './lugaresGeograficos/ciudad.module';
+import { CategoriaModule } from './producto/categoria.module';
+
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -66,7 +69,7 @@ import { CiudadModule } from './lugaresGeograficos/ciudad.module';
       }),
     }),
 
-    TypeOrmModule.forFeature([Usuario, RolUsuario, Rol, Comercio, TipoComercio, InformacionContacto, TipoInformacionContacto,Producto]),
+    TypeOrmModule.forFeature([Usuario, RolUsuario, Rol, Comercio, TipoComercio, InformacionContacto, TipoInformacionContacto,Producto, Categoria]),
     UsuarioModule,
     RolModule,
     AutenticacionModule, 
@@ -76,6 +79,7 @@ import { CiudadModule } from './lugaresGeograficos/ciudad.module';
     InformacionContactoModule,
     ProductoModule,
     CiudadModule,
+    CategoriaModule
   ],
   controllers: [AppController],
   providers: [AppService],

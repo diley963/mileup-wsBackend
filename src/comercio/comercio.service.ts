@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import { Comercio } from './comercio.entity';
 import { CrearComercioDto } from './dto/crear-comercio.dto';
 import { EditarComercioDto } from './dto/editar-comercio.dto';
-import { InformacionContacto } from '../informacionContacto/informacionContacto.entity';
 
 @Injectable()
 export class ComercioService {
