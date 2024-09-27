@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Comercio } from './comercio.entity';
@@ -61,5 +61,40 @@ export class ComercioService {
     
     return comercios;
   }
+  async consultarPorTipoComercioYCiudad(
+    tipoComercioId?: string, // Opcional
+    ciudadId?: string, // Opcional
+  ): Promise<Comercio[]> {
+  
+    // Verificar si al menos uno de los parámetros está presente
+    if (!tipoComercioId && !ciudadId) {
+      throw new BadRequestException('Debe proporcionar al menos un tipo de comercio o una ciudad para realizar la consulta.');
+    }
+  
+    const query = this.comercioRepositorio.createQueryBuilder('comercio')
+      .leftJoinAndSelect('comercio.usuario', 'usuario')
+      .leftJoinAndSelect('comercio.tipoComercio', 'tipoComercio')
+      .leftJoinAndSelect('comercio.informacionContactos', 'informacionContactos')
+      .leftJoinAndSelect('informacionContactos.tipoInformacion', 'tipoInformacion')
+      .leftJoinAndSelect('comercio.ciudad', 'ciudad'); // Join con ciudad
+  
+    // Aplicar filtros condicionalmente
+    if (tipoComercioId) {
+      query.andWhere('tipoComercio.id = :tipoComercioId', { tipoComercioId });
+    }
+  
+    if (ciudadId) {
+      query.andWhere('ciudad.id = :ciudadId', { ciudadId });
+    }
+  
+    const comercios = await query.getMany();
+  
+    if (!comercios.length) {
+      throw new NotFoundException('No se encontraron comercios para los criterios proporcionados.');
+    }
+  
+    return comercios;
+}
+
   
 }

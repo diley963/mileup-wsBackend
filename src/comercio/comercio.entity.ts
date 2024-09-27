@@ -12,6 +12,7 @@ import { TipoComercio } from '../tipoComercio/tipo-comercio.entity';
 import { InformacionContacto } from '../informacionContacto/informacionContacto.entity';
 import { Producto } from '../producto/producto.entity';
 import { Ciudad } from '../lugaresGeograficos/ciudad.entity'; // Importa la entidad Ciudad
+import { ServicioDomiciliario } from '../servicio/servicio-domiciliario.entity'; // Importar la entidad ServicioDomiciliario
 
 @Entity('comercio')
 export class Comercio {
@@ -77,4 +78,8 @@ export class Comercio {
 
   @OneToMany(() => Producto, (producto) => producto.comercio, { cascade: true })
   productos: Producto[];
+
+  @OneToMany(() => ServicioDomiciliario, (servicioDomiciliario) => servicioDomiciliario.comercio)
+  serviciosDomiciliarios: ServicioDomiciliario[]; // Relación con ServicioDomiciliario
+
 }

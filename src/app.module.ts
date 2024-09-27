@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ServicioDomiciliarioGateway } from './gateway/servicio-domiciliario.gateway';
 
 // Importar las entidades
 import { Usuario } from './usuario/usuario.entity';
@@ -17,7 +18,11 @@ import { Pais } from './lugaresGeograficos/pais.entity';
 import { Departamento } from './lugaresGeograficos/departamento.entity';
 import { Ciudad } from './lugaresGeograficos/ciudad.entity';
 import { Categoria } from './producto/categoria.entity';
-
+import { Colaborador } from './colaborador/colaborador.entity';
+import { EstadoEntrega } from './estados/estado-entrega.entity';
+import { ServicioDomiciliario } from './servicio/servicio-domiciliario.entity';
+import { Transporte } from './transporte/transporte.entity';
+import { Cliente } from './cliente/cliente.entity';
 // Importar los módulos
 import { UsuarioModule } from './usuario/usuario.module';
 import { RolModule } from './usuario/rol/rol.module';
@@ -59,7 +64,13 @@ import { CategoriaModule } from './producto/categoria.module';
           Pais,
           Departamento,
           Ciudad,
-          Categoria
+          Categoria,
+          Colaborador,
+          EstadoEntrega,
+          ServicioDomiciliario,
+          Transporte,
+          Cliente
+
         ],
         synchronize: true,
         logging: true,
@@ -69,7 +80,25 @@ import { CategoriaModule } from './producto/categoria.module';
       }),
     }),
 
-    TypeOrmModule.forFeature([Usuario, RolUsuario, Rol, Comercio, TipoComercio, InformacionContacto, TipoInformacionContacto,Producto, Categoria]),
+    TypeOrmModule.forFeature([
+          Usuario, 
+          RolUsuario, 
+          Rol, 
+          Comercio, 
+          TipoComercio, 
+          InformacionContacto, 
+          TipoInformacionContacto,
+          Producto,
+          Pais,
+          Departamento,
+          Ciudad,
+          Categoria,
+          Colaborador,
+          EstadoEntrega,
+          ServicioDomiciliario,
+          Transporte,
+          Cliente
+    ]),
     UsuarioModule,
     RolModule,
     AutenticacionModule, 
@@ -82,6 +111,6 @@ import { CategoriaModule } from './producto/categoria.module';
     CategoriaModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ServicioDomiciliarioGateway],
 })
 export class AppModule {}

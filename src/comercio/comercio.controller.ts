@@ -3,6 +3,7 @@ import { ComercioService } from './comercio.service';
 import { CrearComercioDto } from './dto/crear-comercio.dto';
 import { EditarComercioDto } from './dto/editar-comercio.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Ciudad } from 'src/lugaresGeograficos/ciudad.entity';
 
 @ApiTags('comercio')
 @Controller('comercio')
@@ -54,4 +55,15 @@ export class ComercioController {
   async consultaPorTipoComercio(@Param('tipoComercioId') tipoComercioId: string) {
     return this.comercioServicio.consultarPorTipoComercio(tipoComercioId);
   }
+
+  @Get('tipo-comercio/:tipoComercioId/ciudad/:ciudadId')
+  @ApiOperation({ summary: 'Obtener comercios por ID de tipo de comercio y ciudad' })
+  @ApiResponse({ status: 200, description: 'Lista de comercios obtenida correctamente' })
+  async consultaPorTipoComercioCiudad(
+    @Param('tipoComercioId') tipoComercioId: string,
+    @Param('ciudadId') ciudadId: string
+  ) {
+    return this.comercioServicio.consultarPorTipoComercioYCiudad(tipoComercioId, ciudadId);
+  }
+
 }

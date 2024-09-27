@@ -5,11 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "chrome",
+            "type": "node",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}"
+            "name": "Iniciar NestJS",
+            "program": "${workspaceFolder}/dist/main.js", // Ajusta la ruta a tu archivo principal
+            "preLaunchTask": "tsc: build - tsconfig.json", // Compilar TypeScript antes de iniciar
+            "outFiles": ["${workspaceFolder}/dist/**/*.js"], // Carpeta donde se encuentran los archivos compilados
+            "sourceMaps": true, // Habilitar mapas de origen para TypeScript
+            "console": "integratedTerminal", // Usar la terminal integrada
+            "restart": true // Reiniciar automáticamente la aplicación en caso de cambios
         }
     ]
 }
