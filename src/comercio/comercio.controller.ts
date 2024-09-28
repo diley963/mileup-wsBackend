@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/commo
 import { ComercioService } from './comercio.service';
 import { CrearComercioDto } from './dto/crear-comercio.dto';
 import { EditarComercioDto } from './dto/editar-comercio.dto';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse,ApiParam } from '@nestjs/swagger';
 import { Ciudad } from 'src/lugaresGeograficos/ciudad.entity';
 
 @ApiTags('comercio')
@@ -52,18 +52,22 @@ export class ComercioController {
   @Get('tipo-comercio/:tipoComercioId')
   @ApiOperation({ summary: 'Obtener comercios por ID de tipo de comercio' })
   @ApiResponse({ status: 200, description: 'Lista de comercios obtenida correctamente' })
-  async consultaPorTipoComercio(@Param('tipoComercioId') tipoComercioId: string) {
+  async consultaPorTipoComercio(@Param('tipoComercioId') tipoComercioId?: string) {
     return this.comercioServicio.consultarPorTipoComercio(tipoComercioId);
   }
 
-  @Get('tipo-comercio/:tipoComercioId/ciudad/:ciudadId')
+  @Get('tipo-comercio/:tipoComercioId?/ciudad/:ciudadId')
   @ApiOperation({ summary: 'Obtener comercios por ID de tipo de comercio y ciudad' })
   @ApiResponse({ status: 200, description: 'Lista de comercios obtenida correctamente' })
+  @ApiParam({ name: 'tipoComercioId', required: false, description: 'ID del tipo de comercio' })
+  @ApiParam({ name: 'ciudadId', required: false, description: 'ID de la ciudad' })
   async consultaPorTipoComercioCiudad(
-    @Param('tipoComercioId') tipoComercioId: string,
-    @Param('ciudadId') ciudadId: string
+    @Param('tipoComercioId') tipoComercioId?: string,
+    @Param('ciudadId') ciudadId?: string
   ) {
     return this.comercioServicio.consultarPorTipoComercioYCiudad(tipoComercioId, ciudadId);
   }
+
+  
 
 }

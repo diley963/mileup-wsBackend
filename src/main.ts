@@ -8,6 +8,14 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+
+     // Habilitar CORS
+    app.enableCors({
+      origin: '*', // Permitir cualquier origen. Es mejor restringir esto en producción.
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+      credentials: true, // Permitir cookies en peticiones
+    });
+    
     // Configuración de Swagger
     const config = new DocumentBuilder()
     .setTitle('API sistema mile up')

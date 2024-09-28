@@ -58,7 +58,7 @@ export class Comercio {
   ciudadId: string;
 
   @Column({ type: 'uuid', name: 'tipo_comercio_id',nullable: true })
-  tipoComercioId: string;
+  tipoComercioId?: string;
 
   // Relaciones
   @ManyToOne(() => Usuario, (usuario) => usuario.comercios)
@@ -71,7 +71,7 @@ export class Comercio {
 
   @ManyToOne(() => TipoComercio, (tipoComercio) => tipoComercio.comercios)
   @JoinColumn({ name: 'tipo_comercio_id' })
-  tipoComercio: TipoComercio;
+  tipoComercio?: TipoComercio;
 
   @OneToMany(() => InformacionContacto, (informacionContacto) => informacionContacto.comercio)
   informacionContactos: InformacionContacto[];
