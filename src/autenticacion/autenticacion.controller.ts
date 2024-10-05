@@ -16,9 +16,9 @@ export class AutenticacionController {
 
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
-    const { nombre_usuario, contrasena } = loginDto;
+    const { correo_electronico, contrasena } = loginDto;
     const user = await this.autenticacionService.validarUsuario(
-      nombre_usuario,
+      correo_electronico,
       contrasena,
     );
 

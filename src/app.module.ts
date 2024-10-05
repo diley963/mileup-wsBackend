@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServicioDomiciliarioGateway } from './gateway/servicio-domiciliario.gateway';
-
 // Importar las entidades
 import { Usuario } from './usuario/usuario.entity';
 import { Rol } from './usuario/rol/rol.entity';
@@ -34,7 +33,7 @@ import { InformacionContactoModule } from './informacionContacto/informacion-con
 import { ProductoModule } from './producto/producto.module';
 import { CiudadModule } from './lugaresGeograficos/ciudad.module';
 import { CategoriaModule } from './producto/categoria.module';
-
+import { RolUsuarioModule } from './usuario/usuarioRol/rol-usuario.module';
 
 @Module({
   imports: [
@@ -70,6 +69,7 @@ import { CategoriaModule } from './producto/categoria.module';
           ServicioDomiciliario,
           Transporte,
           Cliente
+          
 
         ],
         synchronize: true,
@@ -108,7 +108,8 @@ import { CategoriaModule } from './producto/categoria.module';
     InformacionContactoModule,
     ProductoModule,
     CiudadModule,
-    CategoriaModule
+    CategoriaModule,
+    RolUsuarioModule
   ],
   controllers: [AppController],
   providers: [AppService, ServicioDomiciliarioGateway],

@@ -28,7 +28,10 @@ export class UsuarioService {
   
 
   async obtenerUno(id: string): Promise<Usuario> {
-    const usuario = await this.usuarioRepository.findOneBy({ id });
+    const usuario = await this.usuarioRepository.findOne({ 
+      where: { id },
+      relations: ['rolUsuarios', 'rolUsuarios.rol'],
+    });
     if (!usuario) {
       throw new NotFoundException(`Usuario con ID ${id} no encontrado`);
     }
@@ -36,11 +39,11 @@ export class UsuarioService {
   }
 
 
-  async obtenerPorNombre(nombreUsuario: string): Promise<Usuario> {
+  async obtenerPorCorreo(correo_electronico: string): Promise<Usuario> {
     return this.usuarioRepository.createQueryBuilder('usuario')
       .leftJoinAndSelect('usuario.rolUsuarios', 'rolUsuario')
       .leftJoinAndSelect('rolUsuario.rol', 'rol')
-      .where('usuario.nombreUsuario = :nombreUsuario', { nombreUsuario })
+      .where('usuario.correo_electronico = :correo_electronico', { correo_electronico })
       .getOne();
   }
 

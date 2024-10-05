@@ -29,7 +29,7 @@ import { ApiTags } from '@nestjs/swagger';
   
     // Endpoint protegido: Crear un nuevo rol
     @Post()
-    @UseGuards(AuthGuard('jwt'))
+    //@UseGuards(AuthGuard('jwt'))
     async crear(@Body() crearRolDto: CrearRolDto) {
       try {
         const rol = await this.rolService.crearRol(crearRolDto.nombre);

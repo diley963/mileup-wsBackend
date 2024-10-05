@@ -11,10 +11,10 @@ export class AutenticacionService {
   ) {}
 
   async validarUsuario(
-    nombre_usuario: string,
+    correo_electronico: string,
     contrasena: string,
   ): Promise<Usuario | null> {
-    const user = await this.usuarioService.obtenerPorNombre(nombre_usuario);
+    const user = await this.usuarioService.obtenerPorCorreo(correo_electronico);
     if (user && user.contrasena === contrasena) {
       return user;
     }

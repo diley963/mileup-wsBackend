@@ -1,13 +1,17 @@
-import { Entity, ManyToOne, PrimaryColumn, JoinColumn } from 'typeorm';
+import { Entity, ManyToOne, PrimaryColumn, JoinColumn, Column,PrimaryGeneratedColumn } from 'typeorm';
 import { Usuario } from '../usuario.entity';
 import { Rol } from '../rol/rol.entity';
 
 @Entity('rol_usuario')
 export class RolUsuario {
-  @PrimaryColumn('uuid', { name: 'rol_id' })  
+
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column('uuid', { name: 'rol_id' })  
   rolId: string;
 
-  @PrimaryColumn('uuid', { name: 'usuario_id' })
+  @Column('uuid', { name: 'usuario_id' })
   usuarioId: string;
 
   @ManyToOne(() => Usuario, usuario => usuario.rolUsuarios , { onDelete: 'CASCADE' })

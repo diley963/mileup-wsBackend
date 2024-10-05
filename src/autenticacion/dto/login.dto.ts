@@ -8,7 +8,7 @@ export class LoginDto {
   @MinLength(3, {
     message: 'El nombre de usuario debe tener al menos 3 caracteres',
   })
-  nombre_usuario: string;
+  correo_electronico: string;
 
   @IsString()
   @IsNotEmpty({ message: 'La contraseña es obligatoria' })
