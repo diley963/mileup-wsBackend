@@ -21,7 +21,7 @@ export class ComercioService {
   async consultarId(id: string): Promise<Comercio> {
     const comercio = await this.comercioRepositorio.findOne({
       where: { id },
-      relations: ['usuario', 'informacionContactos', 'informacionContactos.tipoInformacion'],
+      relations: ['usuario', 'informacionContactos', 'informacionContactos.tipoInformacion', 'tipoComercio', 'productos', 'ciudad'],
     });
     
     if (!comercio) {
@@ -47,13 +47,19 @@ export class ComercioService {
   }
 
   async consultarPorTipoComercio(tipoComercioId: string): Promise<Comercio[]> {
-    const comercios = await this.comercioRepositorio.createQueryBuilder('comercio')
+
+    const comercios = await this.comercioRepositorio.find({
+      where: { tipoComercioId},
+      relations: ['usuario', 'informacionContactos', 'informacionContactos.tipoInformacion', 'tipoComercio', 'productos', 'ciudad'],
+    });
+
+    /*const comercios = await this.comercioRepositorio.createQueryBuilder('comercio')
       .leftJoinAndSelect('comercio.usuario', 'usuario')
       .leftJoinAndSelect('comercio.tipoComercio', 'tipoComercio')
       .leftJoinAndSelect('comercio.informacionContactos', 'informacionContactos')
       .leftJoinAndSelect('informacionContactos.tipoInformacion', 'tipoInformacion')
       .where('tipoComercio.id = :tipoComercioId', { tipoComercioId })
-      .getMany();
+      .getMany();*/
   
     if (!comercios.length) {
       throw new NotFoundException(`No se encontraron comercios para el tipo de comercio con id ${tipoComercioId}`);
@@ -61,6 +67,7 @@ export class ComercioService {
     
     return comercios;
   }
+  
   async consultarPorTipoComercioYCiudad(
     tipoComercioId?: string, // Opcional
     ciudadId?: string, // Opcional
