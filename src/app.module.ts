@@ -34,6 +34,8 @@ import { ProductoModule } from './producto/producto.module';
 import { CiudadModule } from './lugaresGeograficos/ciudad.module';
 import { CategoriaModule } from './producto/categoria.module';
 import { RolUsuarioModule } from './usuario/usuarioRol/rol-usuario.module';
+import { FirebaseModule } from './firebase/firebase.module';
+
 
 @Module({
   imports: [
@@ -109,7 +111,8 @@ import { RolUsuarioModule } from './usuario/usuarioRol/rol-usuario.module';
     ProductoModule,
     CiudadModule,
     CategoriaModule,
-    RolUsuarioModule
+    RolUsuarioModule,
+    FirebaseModule
   ],
   controllers: [AppController],
   providers: [AppService, ServicioDomiciliarioGateway],

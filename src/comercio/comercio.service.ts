@@ -51,15 +51,7 @@ export class ComercioService {
     const comercios = await this.comercioRepositorio.find({
       where: { tipoComercioId},
       relations: ['usuario', 'informacionContactos', 'informacionContactos.tipoInformacion', 'tipoComercio', 'productos', 'ciudad'],
-    });
-
-    /*const comercios = await this.comercioRepositorio.createQueryBuilder('comercio')
-      .leftJoinAndSelect('comercio.usuario', 'usuario')
-      .leftJoinAndSelect('comercio.tipoComercio', 'tipoComercio')
-      .leftJoinAndSelect('comercio.informacionContactos', 'informacionContactos')
-      .leftJoinAndSelect('informacionContactos.tipoInformacion', 'tipoInformacion')
-      .where('tipoComercio.id = :tipoComercioId', { tipoComercioId })
-      .getMany();*/
+    });  
   
     if (!comercios.length) {
       throw new NotFoundException(`No se encontraron comercios para el tipo de comercio con id ${tipoComercioId}`);
@@ -67,41 +59,42 @@ export class ComercioService {
     
     return comercios;
   }
-  
+
   async consultarPorTipoComercioYCiudad(
-    tipoComercioId?: string, // Opcional
-    ciudadId?: string, // Opcional
-  ): Promise<Comercio[]> {
-  
-    // Verificar si al menos uno de los parámetros está presente
-    if (!tipoComercioId && !ciudadId) {
-      throw new BadRequestException('Debe proporcionar al menos un tipo de comercio o una ciudad para realizar la consulta.');
-    }
-  
-    const query = this.comercioRepositorio.createQueryBuilder('comercio')
-      .leftJoinAndSelect('comercio.usuario', 'usuario')
-      .leftJoinAndSelect('comercio.tipoComercio', 'tipoComercio')
-      .leftJoinAndSelect('comercio.informacionContactos', 'informacionContactos')
-      .leftJoinAndSelect('informacionContactos.tipoInformacion', 'tipoInformacion')
-      .leftJoinAndSelect('comercio.ciudad', 'ciudad'); // Join con ciudad
-  
-    // Aplicar filtros condicionalmente
-    if (tipoComercioId) {
-      query.andWhere('tipoComercio.id = :tipoComercioId', { tipoComercioId });
-    }
-  
-    if (ciudadId) {
-      query.andWhere('ciudad.id = :ciudadId', { ciudadId });
-    }
-  
-    const comercios = await query.getMany();
-  
-    if (!comercios.length) {
-      throw new NotFoundException('No se encontraron comercios para los criterios proporcionados.');
-    }
-  
-    return comercios;
-}
+      tipoComercioId?: string, // Opcional
+      ciudadId?: string, // Opcional
+    ): Promise<Comercio[]> {
+    
+      // Verificar si al menos uno de los parámetros está presente
+      if (!tipoComercioId && !ciudadId) {
+        throw new BadRequestException('Debe proporcionar al menos un tipo de comercio o una ciudad para realizar la consulta.');
+      }
+      
+    
+      const query = this.comercioRepositorio.createQueryBuilder('comercio')
+        .leftJoinAndSelect('comercio.usuario', 'usuario')
+        .leftJoinAndSelect('comercio.tipoComercio', 'tipoComercio')
+        .leftJoinAndSelect('comercio.informacionContactos', 'informacionContactos')
+        .leftJoinAndSelect('informacionContactos.tipoInformacion', 'tipoInformacion')
+        .leftJoinAndSelect('comercio.productos', 'productos') 
+        .leftJoinAndSelect('comercio.ciudad', 'ciudad');  
+        
+      if (tipoComercioId) {
+        query.andWhere('tipoComercio.id = :tipoComercioId', { tipoComercioId });
+      }
+    
+      if (ciudadId) {
+        query.andWhere('ciudad.id = :ciudadId', { ciudadId });
+      }
+    
+      const comercios = await query.getMany();
+    
+      if (!comercios.length) {
+        throw new NotFoundException('No se encontraron comercios para los criterios proporcionados.');
+      }
+    
+      return comercios;
+  }
 
   
 }
