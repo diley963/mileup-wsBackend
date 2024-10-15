@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServicioDomiciliarioGateway } from './gateway/servicio-domiciliario.gateway';
+import { UploadController } from './firebase/upload.controller'; // Ajusta la ruta si es necesario
+
 // Importar las entidades
 import { Usuario } from './usuario/usuario.entity';
 import { Rol } from './usuario/rol/rol.entity';
@@ -112,9 +114,9 @@ import { FirebaseModule } from './firebase/firebase.module';
     CiudadModule,
     CategoriaModule,
     RolUsuarioModule,
-    FirebaseModule
+    FirebaseModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, UploadController],
   providers: [AppService, ServicioDomiciliarioGateway],
 })
 export class AppModule {}
