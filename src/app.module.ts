@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServicioDomiciliarioGateway } from './gateway/servicio-domiciliario.gateway';
-import { UploadController } from './firebase/upload.controller'; // Ajusta la ruta si es necesario
+import { UploadController } from './fireBase/upload.controller'; // Ajusta la ruta si es necesario
 
 // Importar las entidades
 import { Usuario } from './usuario/usuario.entity';
@@ -36,7 +36,7 @@ import { ProductoModule } from './producto/producto.module';
 import { CiudadModule } from './lugaresGeograficos/ciudad.module';
 import { CategoriaModule } from './producto/categoria.module';
 import { RolUsuarioModule } from './usuario/usuarioRol/rol-usuario.module';
-import { FirebaseModule } from './firebase/firebase.module';
+import { FirebaseModule } from './fireBase/firebase.module';
 
 
 @Module({

@@ -20,9 +20,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "typeorm",
     "typeorm:migration:run": "typeorm migration:run",
-    "typeorm:migration:revert": "typeorm migration:revert",
-    "postbuild": "cp src/config/serviceAccountKey.json dist/config/serviceAccountKey.json"
-
+    "typeorm:migration:revert": "typeorm migration:revert"
   },
   "dependencies": {
     "@google-cloud/storage": "^7.13.0",
